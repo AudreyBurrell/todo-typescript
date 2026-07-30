@@ -1,5 +1,6 @@
 import type { Task } from "./types/Task"; 
 import TaskItem from "./components/TaskItem";
+import AddTaskModal from "./components/AddTaskModal";
 import "./styles/App.css";
 
 import { useState, useEffect } from "react";
@@ -62,6 +63,7 @@ function App() {
 
 
     const [currentProgress, setProgress] = useState(0);
+    const [showModal, setShowModal] = useState(false);
 
 
     let currentDate = new Date().toDateString();
@@ -109,7 +111,7 @@ function App() {
                     <button>Next &#x276F;</button>
                 </div>
                 <div className="taskAdditionArea">
-                    <button>+ Task</button>
+                    <button onClick={() => setShowModal(true)}>+ Task</button>
                     <button>Upload CSV</button>
                 </div>
             </div>
@@ -121,6 +123,10 @@ function App() {
                             <TaskItem key={task.id} task={task} onToggle={toggleTask} />
                         ))}
                     </ul>
+                    {/*modals*/}
+                    {showModal && (
+                        <AddTaskModal />
+                    )}
                 </div>
             </div>
         
