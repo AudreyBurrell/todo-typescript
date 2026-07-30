@@ -4,6 +4,7 @@ import "./styles/App.css";
 import { useState } from "react";
 
 function App() {
+    const [currentProgress, setProgress] = useState(0);
     let currentDate = new Date().toDateString();
 
     return (
@@ -27,6 +28,7 @@ function App() {
             <div className="leftSideBar">
                 <h2>Todo List</h2>
                 <p id="date-display">{currentDate}</p>
+                <p id="progress-display">Progress: {currentProgress}%</p>
                 <div className="filterArea">
                     {/*When ready, filtering stuff goes here */}
                 </div>
@@ -41,7 +43,7 @@ function App() {
             </div>
             <div className="rightSideBar">
                 <div className="toDoListArea">'
-                
+                    {/* to-do list appears here with title, delete button, and prioirty*/}
                 </div>
             </div>
         
@@ -49,4 +51,8 @@ function App() {
     )
 } 
 
-export default App;
+export default App; 
+
+//HOW AI HAS BEEN USED ON THIS PART
+    //debugging
+    //CSS

@@ -38,7 +38,8 @@ body {
 
 /* Date */
 
-#date-display {
+#date-display,
+#progress-display {
     font-size: 18px;
     color: #666;
     margin: 0;
