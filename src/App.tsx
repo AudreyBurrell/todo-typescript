@@ -93,7 +93,11 @@ function App() {
                 }
             })
         )
-    } 
+    }  
+
+    function closeAddTaskModal() {
+        setShowModal(false);
+    }
 
     
 
@@ -124,8 +128,10 @@ function App() {
                         ))}
                     </ul>
                     {/*modals*/}
+                    {/* Notes for just this addTaskModal to help create other modals:
+                    onClose is what it's called in the props, closeAddTaskModal is the function here.  */}
                     {showModal && (
-                        <AddTaskModal />
+                        <AddTaskModal onClose={closeAddTaskModal} /> 
                     )}
                 </div>
             </div>
@@ -139,3 +145,4 @@ export default App;
 //HOW AI HAS BEEN USED ON THIS PART
     //debugging
     //CSS
+    //figuring out the addTaskModal and what goes in the props
