@@ -8,7 +8,7 @@ interface TaskItemProps { //props interfaces make sure the data is correct
 function TaskItem({ task, onToggle }: TaskItemProps) {
     return (
         <>
-            <li>
+            <li className={task.completed ? "task_completed" : "task" }>
                 {task.title}  
 
                 <button onClick={() => onToggle(task.id)}>
