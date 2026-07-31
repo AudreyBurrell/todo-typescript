@@ -60,5 +60,48 @@ describe ("filterByPriority", () => {
                 priority: "HIGH",
             }
         ]);
+    });
+    it("returns LOW and MEDIUM when those two priorities are selected", () => {
+        const tasks: Task[] = [
+            {
+                id: 1,
+                title: "Task one",
+                completed: true,
+                date: new Date(2026, 6, 31),
+                priority: "HIGH",
+            },
+            {
+                id: 2,
+                title: "Task two",
+                completed: false,
+                date: new Date(2026, 7, 13),
+                priority: "LOW",
+            },
+            {
+                id: 3,
+                title: "Task three",
+                completed: false,
+                date: new Date(2026, 7, 12),
+                priority: "MEDIUM",
+            },
+        ];
+        const selectedPriorities: Priority[] = ["LOW", "MEDIUM"];
+        const result = filterByPriority(tasks, selectedPriorities);
+        expect(result).toEqual([
+            {
+                id: 2,
+                title: "Task two",
+                completed: false,
+                date: new Date(2026, 7, 13),
+                priority: "LOW",
+            },
+            {
+                id: 3,
+                title: "Task three",
+                completed: false,
+                date: new Date(2026, 7, 12),
+                priority: "MEDIUM",
+            },
+        ]);
     })
 })
