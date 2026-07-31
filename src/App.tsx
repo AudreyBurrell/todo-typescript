@@ -3,7 +3,7 @@ import type { Priority } from "./types/Priority";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
-import { filterByPriority } from "./utils/taskUtils";
+import { filterByPriority, filterByComplete } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
 import "./styles/App.css";
 
@@ -13,6 +13,7 @@ function App() {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [showModal, setShowModal] = useState(false);
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
+    const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false);
 
     let currentDate = new Date().toDateString();
     const currentProgress = calculateProgress(tasks);
@@ -57,8 +58,10 @@ function App() {
         }   
     } 
 
-    const visibleTasks = filterByPriority(tasks, selectedPriorities);
-
+    //filter pipeline
+    const priorityFilteredTasks = filterByPriority(tasks, selectedPriorities);
+    const completeFilteredTasks = filterByComplete(priorityFilteredTasks, showOnlyIncomplete);
+    const visibleTasks = completeFilteredTasks;
     
 
     return (
@@ -92,7 +95,7 @@ function App() {
                             Low
                         </label>
                         <label>
-                            <input type="checkbox" />
+                            <input type="checkbox" checked={showOnlyIncomplete} onChange={(event) => setShowOnlyIncomplete(event.target.checked)} />
                             Only show incomplete items
                         </label>
                     </div> 
@@ -108,7 +111,7 @@ function App() {
                 </div>
             </div>
             <div className="rightSideBar">
-                <div className="toDoListArea">'
+                <div className="toDoListArea">
                     {/* to-do list appears here with title, delete button, and prioirty*/}
                     <ul className="taskList">
                         {visibleTasks.map((task) => (

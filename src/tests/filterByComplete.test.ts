@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { filterByComplete } from "../utils/taskUtils";
 import type { Task } from "../types/Task";
-import type { Priority } from "../types/Priority"; 
 
 describe("filterByComplete", () => {
     it("returns all tasks if it isn't checked", () => {
