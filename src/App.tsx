@@ -3,16 +3,16 @@ import type { Priority } from "./types/Priority";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
+import { filterByPriority } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
 import "./styles/App.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [showModal, setShowModal] = useState(false);
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
-
 
     let currentDate = new Date().toDateString();
     const currentProgress = calculateProgress(tasks);
@@ -54,9 +54,10 @@ function App() {
                 ...selectedPriorities,
                 priority
             ])
-        }
-        
-    }
+        }   
+    } 
+
+    const visibleTasks = filterByPriority(tasks, selectedPriorities);
 
     
 
@@ -105,7 +106,7 @@ function App() {
                 <div className="toDoListArea">'
                     {/* to-do list appears here with title, delete button, and prioirty*/}
                     <ul className="taskList">
-                        {tasks.map((task) => (
+                        {visibleTasks.map((task) => (
                             <TaskItem key={task.id} task={task} onToggle={toggleTask} />
                         ))}
                     </ul>
