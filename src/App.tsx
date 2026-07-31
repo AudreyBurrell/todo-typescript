@@ -2,69 +2,17 @@ import type { Task } from "./types/Task";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
+import { initialTasks } from "./utils/initialTasks";
 import "./styles/App.css";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-    const [tasks, setTasks] = useState<Task[]>([
-        {
-            id: 1,
-            title: "Finish TypeScript Todo App",
-            completed: false,
-            date: new Date(2026, 6, 29),
-            priority: "HIGH",
-        },
-        {
-            id: 2,
-            title: "Study React hooks",
-            completed: true,
-            date: new Date(2026, 6, 29),
-            priority: "MEDIUM",
-        },
-        {
-            id: 3,
-            title: "Read Frankenstein chapters 3-5",
-            completed: false,
-            date: new Date(2026, 6, 29),
-            priority: "LOW",
-        },
-        {
-            id: 4,
-            title: "Submit internship application",
-            completed: false,
-            date: new Date(2026, 6, 30),
-            priority: "HIGH",
-        },
-        {
-            id: 5,
-            title: "Go grocery shopping",
-            completed: false,
-            date: new Date(2026, 6, 30),
-            priority: "MEDIUM",
-        },
-        {
-            id: 6,
-            title: "Organize computer files",
-            completed: true,
-            date: new Date(2026, 6, 28),
-            priority: "LOW",
-        },
-        {
-            id: 7,
-            title: "Practice LeetCode problems",
-            completed: false,
-            date: new Date(2026, 6, 31),
-            priority: "HIGH",
-        },
-    ]);
-    
-
+    const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [showModal, setShowModal] = useState(false);
 
 
     let currentDate = new Date().toDateString();
-    const totalTasks = tasks.length;
     const currentProgress = calculateProgress(tasks);
 
     function toggleTask(id: number) {
