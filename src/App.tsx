@@ -1,15 +1,17 @@
 import type { Task } from "./types/Task"; 
+import type { Priority } from "./types/Priority";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
 import { initialTasks } from "./utils/initialTasks";
 import "./styles/App.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [showModal, setShowModal] = useState(false);
+    const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
 
 
     let currentDate = new Date().toDateString();
@@ -48,7 +50,30 @@ function App() {
                 <p id="date-display">{currentDate}</p>
                 <p id="progress-display" className={currentProgress < 50 ? "regular-progress" : "green-progress"}>Progress: {currentProgress}%</p>
                 <div className="filterArea">
-                    {/*When ready, filtering stuff goes here */}
+                    {/* 
+                    Filter options:
+                    1. Only display certain priorities (checkboxes, not radio buttons, to allow for multiple)
+                    2. Only display incomplete items
+                    3. Sort by priority
+                    
+                    Search bar
+                    */}
+                    <h3>Filters</h3>
+                    <div className="priorityFilter">
+                        <h4>Priority</h4>
+                        <label>
+                            <input type="checkbox" />
+                            High
+                        </label>
+                        <label>
+                            <input type="checkbox" />
+                            Medium
+                        </label>
+                        <label>
+                            <input type="checkbox" />
+                            Low
+                        </label>
+                    </div>
                 </div>
                 <div className="navigation">
                     <button>&#x276E; Previous</button>
