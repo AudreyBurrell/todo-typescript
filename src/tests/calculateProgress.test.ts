@@ -25,6 +25,48 @@ describe("calculateProgress", () => {
     });
     it("returns 0 when it has no tasks", () => {
         expect(calculateProgress([])).toBe(0);
+    });
+    it("returns 100 when all tasks are complete", () => {
+        const tasks: Task[] = 
+        [
+            {
+                id: 1,
+                title: "Task one",
+                completed: true,
+                date: new Date(),
+                priority: "HIGH",
+            },
+            {
+                id: 2,
+                title: "Task two",
+                completed: true,
+                date: new Date(),
+                priority: "LOW",
+            },
+        ];
+        const result = calculateProgress(tasks);
+        expect(result).toBe(100);
+    });
+    it("returns 0 when no tasks are complete", () => {
+        const tasks: Task[] = 
+        [
+            {
+                id: 1,
+                title: "Task one",
+                completed: false,
+                date: new Date(),
+                priority: "HIGH",
+            },
+            {
+                id: 2,
+                title: "Task two",
+                completed: false,
+                date: new Date(),
+                priority: "LOW",
+            },
+        ];
+        const result = calculateProgress(tasks);
+        expect(result).toBe(0);
     })
 })
 
