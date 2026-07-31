@@ -39,6 +39,23 @@ function App() {
 
     function closeAddTaskModal() {
         setShowModal(false);
+    } 
+
+    function handlePriorities(priority: Priority) {
+        //this function just updates the list that will be used to keep track of which priorities need to be included
+        //if it is selected, remove it
+        //if it hasn't been selected, add it
+        if (selectedPriorities.includes(priority)) {
+            setSelectedPriorities(
+                selectedPriorities.filter((item) => item !== priority)
+            );
+        } else {
+            setSelectedPriorities([
+                ...selectedPriorities,
+                priority
+            ])
+        }
+        
     }
 
     
@@ -62,15 +79,15 @@ function App() {
                     <div className="priorityFilter">
                         <h4>Priority</h4>
                         <label>
-                            <input type="checkbox" />
+                            <input type="checkbox" checked={selectedPriorities.includes("HIGH")} onChange={() => handlePriorities("HIGH")} />
                             High
                         </label>
                         <label>
-                            <input type="checkbox" />
+                            <input type="checkbox" checked={selectedPriorities.includes("MEDIUM")} onChange={() => handlePriorities("MEDIUM")} />
                             Medium
                         </label>
                         <label>
-                            <input type="checkbox" />
+                            <input type="checkbox" checked={selectedPriorities.includes("LOW")} onChange={() => handlePriorities("LOW")} />
                             Low
                         </label>
                     </div>
