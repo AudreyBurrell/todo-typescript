@@ -7,5 +7,8 @@ export function calculateProgress(tasks: Task[]): number {
             completeTasks++;
         }
     }
+    if (completeTasks === 0) {
+        return 0;
+    }
     return Math.round((completeTasks / tasks.length) * 100);
 }
