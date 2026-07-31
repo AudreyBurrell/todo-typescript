@@ -271,9 +271,3 @@ describe("filter by due date", () => {
     });
 }); 
 
-
-
-
-// export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], currentDate: Date): Task[] {
-
-// }

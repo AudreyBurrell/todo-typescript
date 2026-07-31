@@ -20,6 +20,15 @@ export function filterByComplete(tasks: Task[], checked: boolean): Task[] {
     }
 } 
 
+function determineTime(currentDate: Date, testingDate: Date, dueDates: DueDate[]): boolean {
+    //returns true or false if it matches one of the due dates in dueDates. 
+
+}
+
 export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], currentDate: Date): Task[] {
+    //go through the tasks with the date logic (maybe I could have a separate function for determining that actually)
+    if(selectedDueDates.length === 0) {
+        return tasks;
+    }
 
 }
