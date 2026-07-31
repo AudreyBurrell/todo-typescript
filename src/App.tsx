@@ -17,7 +17,7 @@ function App() {
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false);
     const [selectedDueDate, setSelectedDueDate] = useState<DueDate[]>([]);
 
-    let currentDate = new Date().toDateString();
+    let currentDate = new Date();
     const currentProgress = calculateProgress(tasks);
 
     function toggleTask(id: number) {
@@ -86,7 +86,7 @@ function App() {
         <main className="app">
             <div className="leftSideBar">
                 <h2>Todo List</h2>
-                <p id="date-display">{currentDate}</p>
+                <p id="date-display">{currentDate.toDateString()}</p>
                 <p id="progress-display" className={currentProgress < 50 ? "regular-progress" : "green-progress"}>Progress: {currentProgress}%</p>
                 <div className="filterArea">
                     {/* 

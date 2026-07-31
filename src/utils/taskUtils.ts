@@ -1,5 +1,6 @@
 import type { Task } from "../types/Task";
 import type { Priority } from "../types/Priority";
+import type { DueDate } from "../types/DueDate";
 
 export function filterByPriority(tasks: Task[], selectedPriorities: Priority[]): Task[] {
     //if no priorities are selected, show every task
@@ -17,4 +18,8 @@ export function filterByComplete(tasks: Task[], checked: boolean): Task[] {
     } else {
         return tasks;
     }
+} 
+
+export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], currentDate: Date): Task[] {
+
 }
