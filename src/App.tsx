@@ -1,6 +1,7 @@
 import type { Task } from "./types/Task"; 
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
+import { calculateProgress } from "./utils/calculateProgress";
 import "./styles/App.css";
 
 import { useState, useEffect } from "react";
@@ -57,28 +58,14 @@ function App() {
             priority: "HIGH",
         },
     ]);
-    useEffect(() => {
-        updateProgress();
-    }, [tasks]); 
+    
 
-
-    const [currentProgress, setProgress] = useState(0);
     const [showModal, setShowModal] = useState(false);
 
 
     let currentDate = new Date().toDateString();
     const totalTasks = tasks.length;
-    
-    function updateProgress() {
-        let completeTasks = 0;
-        for (let task of tasks) {
-            if (task.completed) {
-                completeTasks++;
-            }
-        }
-        let newProgress = Math.round((completeTasks / totalTasks) * 100);
-        setProgress(newProgress);
-    }
+    const currentProgress = calculateProgress(tasks);
 
     function toggleTask(id: number) {
         setTasks(
@@ -136,7 +123,7 @@ function App() {
                     {/* Notes for just this addTaskModal to help create other modals:
                     onClose is what it's called in the props, closeAddTaskModal is the function here.  */}
                     {showModal && (
-                        <AddTaskModal onClose={closeAddTaskModal} /> 
+                        <AddTaskModal onClose={closeAddTaskModal} onAddTask={addTask} /> 
                     )}
                 </div>
             </div>
