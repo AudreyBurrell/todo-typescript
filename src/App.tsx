@@ -1,5 +1,6 @@
 import type { Task } from "./types/Task"; 
 import type { Priority } from "./types/Priority";
+import type { DueDate } from "./types/DueDate";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
@@ -14,6 +15,7 @@ function App() {
     const [showModal, setShowModal] = useState(false);
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false);
+    const [selectedDueDate, setSelectedDueDate] = useState<DueDate[]>([]);
 
     let currentDate = new Date().toDateString();
     const currentProgress = calculateProgress(tasks);
@@ -58,6 +60,22 @@ function App() {
         }   
     } 
 
+    function handleDueDate(dueDate: DueDate) {
+        //this function updates the list that will be used to keep track of which due dates need to be included
+        //if it is selected, remove it
+        //if it hasn't been selected, add it
+        if (selectedDueDate.includes(dueDate)) {
+            setSelectedDueDate(
+                selectedDueDate.filter((item) => item !== dueDate)
+            );
+        } else {
+            setSelectedDueDate([
+                ...selectedDueDate,
+                dueDate
+            ]);
+        }
+    }
+
     //filter pipeline
     const priorityFilteredTasks = filterByPriority(tasks, selectedPriorities);
     const completeFilteredTasks = filterByComplete(priorityFilteredTasks, showOnlyIncomplete);
@@ -74,8 +92,8 @@ function App() {
                     {/* 
                     Filter options:
                     1. Only display certain priorities (checkboxes, not radio buttons, to allow for multiple) DONE
-                    2. Only display incomplete items
-                    3. Sort by priority
+                    2. Only display incomplete items DONE
+                    3. Due date
                     
                     Search bar
                     */}
@@ -98,7 +116,22 @@ function App() {
                             <input type="checkbox" checked={showOnlyIncomplete} onChange={(event) => setShowOnlyIncomplete(event.target.checked)} />
                             Only show incomplete items
                         </label>
-                    </div> 
+                    </div>  
+                    <div className="dueDateFilter">
+                        <h4>Due Date</h4>
+                        <label>
+                            <input type="checkbox" checked={selectedDueDate.includes("OVERDUE")} onChange={() => handleDueDate("OVERDUE")} />
+                            Overdue
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={selectedDueDate.includes("DUE TODAY")} onChange={() => handleDueDate("DUE TODAY")} />
+                            Due today
+                        </label>
+                        <label>
+                            <input type="checkbox" checked={selectedDueDate.includes("UPCOMING")} onChange={() => handleDueDate("UPCOMING")} />
+                            Upcoming
+                        </label>
+                    </div>
                     
                 </div>
                 <div className="navigation">
