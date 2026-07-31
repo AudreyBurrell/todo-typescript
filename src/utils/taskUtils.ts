@@ -6,6 +6,7 @@ export function filterByPriority(tasks: Task[], selectedPriorities: Priority[]):
     if (selectedPriorities.length === 0) {
         return tasks;
     } 
-    //temporary
-    //return tasks;
+    //now returning based on selected priorities
+    let newTasks = tasks.filter(task => selectedPriorities.includes(task.priority));
+    return newTasks;
 }
