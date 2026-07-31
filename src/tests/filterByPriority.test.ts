@@ -103,5 +103,26 @@ describe ("filterByPriority", () => {
                 priority: "MEDIUM",
             },
         ]);
-    })
+    });
+    it ("returns nothing when there are no matching priorities", () => {
+        const tasks: Task[] = [
+            {
+                id: 1,
+                title: "Task one",
+                completed: true,
+                date: new Date(),
+                priority: "HIGH",
+            },
+            {
+                id: 2,
+                title: "Task two",
+                completed: false,
+                date: new Date(),
+                priority: "LOW",
+            },
+        ];
+        const selectedPriorities: Priority[] = ["MEDIUM"];
+        const result = filterByPriority(tasks, selectedPriorities);
+        expect(result).toEqual([]);
+    });
 })
