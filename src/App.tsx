@@ -93,7 +93,12 @@ function App() {
                 }
             })
         )
-    }  
+    }   
+
+    function addTask(task: Task) {
+        setTasks([...tasks, task]);
+        setShowModal(false);
+    }
 
     function closeAddTaskModal() {
         setShowModal(false);
