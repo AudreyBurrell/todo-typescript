@@ -70,7 +70,7 @@ function App() {
                 <div className="filterArea">
                     {/* 
                     Filter options:
-                    1. Only display certain priorities (checkboxes, not radio buttons, to allow for multiple)
+                    1. Only display certain priorities (checkboxes, not radio buttons, to allow for multiple) DONE
                     2. Only display incomplete items
                     3. Sort by priority
                     
@@ -91,7 +91,12 @@ function App() {
                             <input type="checkbox" checked={selectedPriorities.includes("LOW")} onChange={() => handlePriorities("LOW")} />
                             Low
                         </label>
-                    </div>
+                        <label>
+                            <input type="checkbox" />
+                            Only show incomplete items
+                        </label>
+                    </div> 
+                    
                 </div>
                 <div className="navigation">
                     <button>&#x276E; Previous</button>

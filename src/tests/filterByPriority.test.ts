@@ -125,4 +125,4 @@ describe ("filterByPriority", () => {
         const result = filterByPriority(tasks, selectedPriorities);
         expect(result).toEqual([]);
     });
-})
+});
