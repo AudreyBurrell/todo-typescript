@@ -12,7 +12,9 @@ function TaskItem({task, onToggle}: TaskItemProps) {
                 <span className="taskTitle">
                     {task.title}
                 </span>
-
+                <span className={`priority priority-${task.priority.toLowerCase()}`}>
+                    {task.priority}
+                </span>
                 <button onClick={() => onToggle(task.id)}>
                     {task.completed ? "↩ Undo" : "✓ Complete"}
                 </button>
