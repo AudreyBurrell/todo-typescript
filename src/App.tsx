@@ -144,7 +144,7 @@ function App() {
                     {/* to-do list appears here with title, delete button, and prioirty*/}
                     <ul className="taskList">
                         {visibleTasks.map((task) => (
-                            <TaskItem key={task.id} task={task} onToggle={toggleTask} />
+                            <TaskItem key={task.id} task={task} onToggle={toggleTask} currentDate={currentDate} />
                         ))}
                     </ul>
                     {/*modals*/}

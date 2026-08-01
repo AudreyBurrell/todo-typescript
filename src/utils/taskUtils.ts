@@ -20,22 +20,29 @@ export function filterByComplete(tasks: Task[], checked: boolean): Task[] {
     }
 } 
 
-function determineTime(currentDate: Date, testingDate: Date, dueDates: DueDate[]): boolean {
+function isSameDay(day1: Date, day2: Date): boolean {
+    return (
+        day1.getFullYear() === day2.getFullYear() &&
+        day1.getMonth() === day2.getMonth() &&
+        day1.getDate() === day2.getDate()
+    )
+}
+export function determineTime(currentDate: Date, testingDate: Date, dueDates: DueDate[]): boolean {
     //returns true or false if it matches one of the due dates in dueDates and is not completed yet.
     for (const dueDate of dueDates) {
         switch (dueDate) {
             case "TODAY":
-                if (testingDate.getTime() === currentDate.getTime()) {
+                if (isSameDay(testingDate, currentDate)) {
                     return true;
                 }
                 break; 
             case "UPCOMING":
-                if (testingDate > currentDate) {
+                if (!isSameDay(testingDate, currentDate) && testingDate > currentDate) {
                     return true;
                 }
                 break; 
             case "OVERDUE":
-                if (testingDate < currentDate) {
+                if (!isSameDay(testingDate, currentDate) && testingDate < currentDate) {
                     return true;
                 }
                 break; 
