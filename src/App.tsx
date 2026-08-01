@@ -124,7 +124,7 @@ function App() {
                             Overdue
                         </label>
                         <label>
-                            <input type="checkbox" checked={selectedDueDate.includes("DUE TODAY")} onChange={() => handleDueDate("DUE TODAY")} />
+                            <input type="checkbox" checked={selectedDueDate.includes("TODAY")} onChange={() => handleDueDate("TODAY")} />
                             Due today
                         </label>
                         <label>

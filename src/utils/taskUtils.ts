@@ -21,8 +21,27 @@ export function filterByComplete(tasks: Task[], checked: boolean): Task[] {
 } 
 
 function determineTime(currentDate: Date, testingDate: Date, dueDates: DueDate[]): boolean {
-    //returns true or false if it matches one of the due dates in dueDates. 
-
+    //returns true or false if it matches one of the due dates in dueDates and is not completed yet.
+    for (const dueDate of dueDates) {
+        switch (dueDate) {
+            case "TODAY":
+                if (testingDate === currentDate) {
+                    return true;
+                }
+                break; 
+            case "UPCOMING":
+                if (testingDate > currentDate) {
+                    return true;
+                }
+                break; 
+            case "OVERDUE":
+                if (testingDate < currentDate) {
+                    return true;
+                }
+                break; 
+        }
+    }
+    return false;
 }
 
 export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], currentDate: Date): Task[] {
@@ -30,5 +49,6 @@ export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], curr
     if(selectedDueDates.length === 0) {
         return tasks;
     }
-
+    let newTasks = tasks.filter(task => !task.completed && task.date && determineTime(currentDate, task.date, selectedDueDates));
+    return newTasks;
 }

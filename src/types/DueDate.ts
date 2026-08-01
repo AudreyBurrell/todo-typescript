@@ -1,1 +1,1 @@
-export type DueDate = "OVERDUE" | "DUE TODAY" | "UPCOMING";
+export type DueDate = "OVERDUE" | "TODAY" | "UPCOMING";
