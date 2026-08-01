@@ -27,9 +27,9 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "";
+        const searchText: string = "";
         const result = filterBySearch(tasks, searchText);
-        expect(result).toEqual([tasks]);
+        expect(result).toEqual(tasks);
     });
     it("returns the task list if the search text is just a bunch of empty spaces", () => {
         const tasks: Task[] = [
@@ -55,9 +55,9 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "           ";
+        const searchText: string = "           ";
         const result = filterBySearch(tasks, searchText);
-        expect(result).toEqual([tasks]);
+        expect(result).toEqual(tasks);
     });
     it("returns an empty list if the text doesn't match any of the tasks", () => {
         const tasks: Task[] = [
@@ -83,7 +83,7 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "four";
+        const searchText: string = "four";
         const result = filterBySearch(tasks, searchText);
         expect(result).toEqual([]);
     });
@@ -111,9 +111,9 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "Task";
+        const searchText: string = "Task";
         const result = filterBySearch(tasks, searchText);
-        expect(result).toEqual([tasks]);
+        expect(result).toEqual(tasks);
     });
     it("returns all items if all items has the text non-case sensitive", () => {
         const tasks: Task[] = [
@@ -139,9 +139,9 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "task";
+        const searchText: string = "task";
         const result = filterBySearch(tasks, searchText);
-        expect(result).toEqual([tasks]);
+        expect(result).toEqual(tasks);
     });
     it("returns just the first task if that's the only thing that contains the text", () => {
         const tasks: Task[] = [
@@ -167,9 +167,9 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "one";
+        const searchText: string = "one";
         const result = filterBySearch(tasks, searchText);
-        expect(result).toEqual(tasks[0]);
+        expect(result).toEqual([tasks[0]]);
     });
     it("returns the first and second tasks if those are the only things that contain the text", () => {
         const tasks: Task[] = [
@@ -195,7 +195,7 @@ describe("filterBySearch", () => {
                 priority: "MEDIUM",
             },
         ];  
-        const searchText: String = "one";
+        const searchText: string = "one";
         const result = filterBySearch(tasks, searchText);
         expect(result).toEqual([tasks[0], tasks[1]]);
     });

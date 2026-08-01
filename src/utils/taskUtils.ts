@@ -60,6 +60,12 @@ export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], curr
     return newTasks;
 } 
 
-export function filterBySearch(tasks: Task[], searchText: String) : Task[] {
-    
+export function filterBySearch(tasks: Task[], searchText: string): Task[] {
+    const newSearchText = searchText.trim().toLowerCase();
+    if (newSearchText === "") {
+        return tasks;
+    }
+    return tasks.filter(task =>
+        task.title.toLowerCase().includes(newSearchText)
+    );
 }
