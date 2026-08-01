@@ -143,9 +143,13 @@ function App() {
                 <div className="toDoListArea">
                     {/* to-do list appears here with title, delete button, and prioirty*/}
                     <ul className="taskList">
-                        {visibleTasks.map((task) => (
-                            <TaskItem key={task.id} task={task} onToggle={toggleTask} currentDate={currentDate} />
-                        ))}
+                        {visibleTasks.length === 0 ? (
+                            <li className="noTasks">No Tasks</li>
+                        ) : (
+                            visibleTasks.map((task) => (
+                                <TaskItem key={task.id} task={task} onToggle={toggleTask} currentDate={currentDate} />
+                            ))
+                        )}
                     </ul>
                     {/*modals*/}
                     {/* Notes for just this addTaskModal to help create other modals:
@@ -165,4 +169,4 @@ export default App;
 //HOW AI HAS BEEN USED ON THIS PART
     //debugging
     //CSS
-    //figuring out the addTaskModal and what goes in the props
+    //figuring out the addTaskModal and what goes in the props 

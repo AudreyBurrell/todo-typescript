@@ -206,7 +206,15 @@ body {
     gap: 15px;
 
     width: 100%;
-} 
+}  
+
+.noTasks {
+    list-style: none;
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    font-size: 15px;
+}
 
 
 .task:hover {
