@@ -4,7 +4,7 @@ import type { DueDate } from "./types/DueDate";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
-import { filterByPriority, filterByComplete } from "./utils/taskUtils";
+import { filterByPriority, filterByComplete, filterByDueDate } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
 import "./styles/App.css";
 
@@ -79,7 +79,8 @@ function App() {
     //filter pipeline
     const priorityFilteredTasks = filterByPriority(tasks, selectedPriorities);
     const completeFilteredTasks = filterByComplete(priorityFilteredTasks, showOnlyIncomplete);
-    const visibleTasks = completeFilteredTasks;
+    const dueDateFilteredTasks = filterByDueDate(completeFilteredTasks, selectedDueDate, currentDate);
+    const visibleTasks = dueDateFilteredTasks;
     
 
     return (
@@ -132,11 +133,6 @@ function App() {
                             Upcoming
                         </label>
                     </div>
-                    
-                </div>
-                <div className="navigation">
-                    <button>&#x276E; Previous</button>
-                    <button>Next &#x276F;</button>
                 </div>
                 <div className="taskAdditionArea">
                     <button onClick={() => setShowModal(true)}>+ Task</button>
