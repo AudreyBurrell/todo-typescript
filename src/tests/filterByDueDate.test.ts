@@ -115,7 +115,7 @@ describe("filter by due date", () => {
                 priority: "MEDIUM",
             },
         ]; 
-        const selectedDueDate: DueDate[] = ["DUE TODAY", "UPCOMING"];
+        const selectedDueDate: DueDate[] = ["TODAY", "UPCOMING"];
         const currentDate: Date = new Date(2026, 7, 12);
         const result = filterByDueDate(tasks, selectedDueDate, currentDate);
         expect(result).toEqual([tasks[1], tasks[2]]);
@@ -144,7 +144,7 @@ describe("filter by due date", () => {
                 priority: "MEDIUM",
             },
         ]; 
-        const selectedDueDate: DueDate[] = ["DUE TODAY", "UPCOMING"];
+        const selectedDueDate: DueDate[] = ["TODAY", "UPCOMING"];
         const currentDate: Date = new Date(2026, 7, 12);
         const result = filterByDueDate(tasks, selectedDueDate, currentDate);
         expect(result).toEqual([tasks[2]]);
@@ -173,7 +173,7 @@ describe("filter by due date", () => {
                 priority: "MEDIUM",
             },
         ]; 
-        const selectedDueDate: DueDate[] = ["DUE TODAY", "UPCOMING", "OVERDUE"];
+        const selectedDueDate: DueDate[] = ["TODAY", "UPCOMING", "OVERDUE"];
         const currentDate: Date = new Date(2026, 7, 12);
         const result = filterByDueDate(tasks, selectedDueDate, currentDate);
         expect(result).toEqual([tasks[0], tasks[1], tasks[2]]);
@@ -202,7 +202,7 @@ describe("filter by due date", () => {
                 priority: "MEDIUM",
             },
         ]; 
-        const selectedDueDate: DueDate[] = ["DUE TODAY", "UPCOMING", "OVERDUE"];
+        const selectedDueDate: DueDate[] = ["TODAY", "UPCOMING", "OVERDUE"];
         const currentDate: Date = new Date(2026, 7, 12);
         const result = filterByDueDate(tasks, selectedDueDate, currentDate);
         expect(result).toEqual([]);
@@ -231,10 +231,10 @@ describe("filter by due date", () => {
                 priority: "MEDIUM",
             },
         ]; 
-        const selectedDueDate: DueDate[] = ["DUE TODAY"];
+        const selectedDueDate: DueDate[] = ["TODAY"];
         const currentDate: Date = new Date(2026, 7, 12);
         const result = filterByDueDate(tasks, selectedDueDate, currentDate);
-        expect(result).toEqual([tasks[1]]);
+        expect(result).toEqual([tasks[2]]);
     });
     it("returns only upcoming tasks", () => {
         const tasks: Task[] = [
@@ -263,7 +263,7 @@ describe("filter by due date", () => {
         const selectedDueDate: DueDate[] = ["UPCOMING"];
         const currentDate: Date = new Date(2026, 7, 12);
         const result = filterByDueDate(tasks, selectedDueDate, currentDate);
-        expect(result).toEqual([tasks[2]]);
+        expect(result).toEqual([tasks[1]]);
     });
     it("returns an empty list when there are no tasks", () => {
         const result = filterByDueDate([], ["OVERDUE"], new Date(2026, 7, 12));

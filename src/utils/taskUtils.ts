@@ -25,7 +25,7 @@ function determineTime(currentDate: Date, testingDate: Date, dueDates: DueDate[]
     for (const dueDate of dueDates) {
         switch (dueDate) {
             case "TODAY":
-                if (testingDate === currentDate) {
+                if (testingDate.getTime() === currentDate.getTime()) {
                     return true;
                 }
                 break; 
