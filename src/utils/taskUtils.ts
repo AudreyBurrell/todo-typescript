@@ -58,4 +58,8 @@ export function filterByDueDate(tasks: Task[], selectedDueDates: DueDate[], curr
     }
     let newTasks = tasks.filter(task => !task.completed && task.date && determineTime(currentDate, task.date, selectedDueDates));
     return newTasks;
+} 
+
+export function filterBySearch(tasks: Task[], searchText: String) : Task[] {
+    
 }
