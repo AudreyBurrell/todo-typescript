@@ -73,8 +73,41 @@ body {
     margin: 0;
 } 
 
+.searchFilter {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 15px;
+
+    background-color: white;
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.searchFilter input[type="text"] {
+    width: 100%;
+    padding: 8px 10px;
+
+    font-size: 14px;
+    color: #333;
+
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+
+    outline: none;
+
+    transition: border-color 0.2s ease;
+}
+
+.searchFilter input[type="text"]:focus {
+    border-color: #4f46e5;
+}
+
 .priorityFilter h4,
-.dueDateFilter h4 {
+.dueDateFilter h4,
+.searchFilter h4 {
     margin: 0 0 5px 0;
     font-size: 1rem;
     font-weight: 600;

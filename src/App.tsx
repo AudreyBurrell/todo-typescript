@@ -16,6 +16,7 @@ function App() {
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false);
     const [selectedDueDate, setSelectedDueDate] = useState<DueDate[]>([]);
+    const [searchText, setSearchText] = useState("");
 
     let currentDate = new Date();
     const currentProgress = calculateProgress(tasks);
@@ -90,15 +91,13 @@ function App() {
                 <p id="date-display">{currentDate.toDateString()}</p>
                 <p id="progress-display" className={currentProgress < 50 ? "regular-progress" : "green-progress"}>Progress: {currentProgress}%</p>
                 <div className="filterArea">
-                    {/* 
-                    Filter options:
-                    1. Only display certain priorities (checkboxes, not radio buttons, to allow for multiple) DONE
-                    2. Only display incomplete items DONE
-                    3. Due date
-                    
-                    Search bar
-                    */}
                     <h3>Filters</h3>
+                    <div className="searchFilter">
+                        <h4>Search</h4>
+                        <label>
+                            <input type="text" placeholder="Search tasks by name..." value={searchText} onChange={(event) => setSearchText(event.target.value)} />
+                        </label>
+                    </div>
                     <div className="priorityFilter">
                         <h4>Priority</h4>
                         <label>
