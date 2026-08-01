@@ -214,21 +214,20 @@ body {
 .rightSideBar {
     flex: 1;
     padding: 40px;
+
+    display: flex;
+    flex-direction: column;
 }
 
-
 .toDoListArea {
-    min-height: calc(100vh - 80px);
+    flex: 1;
 
     background-color: white;
-
     border-radius: 16px;
-
     padding: 25px;
 
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-} 
-
+}
 .taskList {
     list-style: none;
     padding: 0;
