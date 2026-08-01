@@ -4,7 +4,7 @@ import type { DueDate } from "./types/DueDate";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import { calculateProgress } from "./utils/calculateProgress";
-import { filterByPriority, filterByComplete, filterByDueDate } from "./utils/taskUtils";
+import { filterByPriority, filterByComplete, filterByDueDate, filterBySearch } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
 import "./styles/App.css";
 
@@ -81,7 +81,8 @@ function App() {
     const priorityFilteredTasks = filterByPriority(tasks, selectedPriorities);
     const completeFilteredTasks = filterByComplete(priorityFilteredTasks, showOnlyIncomplete);
     const dueDateFilteredTasks = filterByDueDate(completeFilteredTasks, selectedDueDate, currentDate);
-    const visibleTasks = dueDateFilteredTasks;
+    const searchFilteredTasks = filterBySearch(dueDateFilteredTasks, searchText);
+    const visibleTasks = searchFilteredTasks;
     
 
     return (
