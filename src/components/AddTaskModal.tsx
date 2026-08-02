@@ -42,7 +42,7 @@ function AddTaskModal({ onClose, onAddTask } : addTaskProps) {
                                 <input type="date" value={date} onChange={(event) => setDate(event.target.value)} />
                             </label> 
                             <label>
-                                Priority
+                                Priority:
                                 <select value={priority} onChange={(event) => setPriority(event.target.value as Task["priority"])}>
                                     <option value="HIGH">High</option>
                                     <option value="MEDIUM">Medium</option>
