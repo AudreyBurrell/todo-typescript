@@ -3,6 +3,7 @@ import type { Priority } from "./types/Priority";
 import type { DueDate } from "./types/DueDate";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
+import UploadCSVModal from "./components/UploadCSVModal";
 import { calculateProgress } from "./utils/calculateProgress";
 import { filterByPriority, filterByComplete, filterByDueDate, filterBySearch } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
@@ -13,6 +14,7 @@ import { useState } from "react";
 function App() {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [showModal, setShowModal] = useState(false);
+    const [showCSVModal, setShowCSVModal] = useState(false);
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false);
     const [selectedDueDate, setSelectedDueDate] = useState<DueDate[]>([]);
@@ -44,6 +46,10 @@ function App() {
     function closeAddTaskModal() {
         setShowModal(false);
     } 
+
+    function closeCSVModal() {
+        setShowCSVModal(false);
+    }
 
     function handlePriorities(priority: Priority) {
         //this function just updates the list that will be used to keep track of which priorities need to be included
@@ -135,8 +141,18 @@ function App() {
                     </div>
                 </div>
                 <div className="taskAdditionArea">
-                    <button onClick={() => setShowModal(true)}>+ Task</button>
-                    <button>Upload CSV</button>
+                    <button onClick={() => {
+                        setShowModal(true);
+                        setShowCSVModal(false);
+                    }}>
+                        + Task
+                    </button>
+                    <button onClick={() => {
+                        setShowModal(false);
+                        setShowCSVModal(true);
+                    }}>
+                        Upload CSV
+                    </button>
                 </div>
             </div>
             <div className="rightSideBar">
@@ -156,6 +172,9 @@ function App() {
                     onClose is what it's called in the props, closeAddTaskModal is the function here.  */}
                     {showModal && (
                         <AddTaskModal onClose={closeAddTaskModal} onAddTask={addTask} /> 
+                    )}
+                    {showCSVModal && (
+                        <UploadCSVModal onClose={closeCSVModal} />
                     )}
                 </div>
             </div>

@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { describe, it, expect, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import AddTaskModal from "./AddTaskModal"; 
-import type { Task } from "../types/Task"; 
 
 describe("AddTaskModal", () => {
     it("displays the task modal title", () => {
