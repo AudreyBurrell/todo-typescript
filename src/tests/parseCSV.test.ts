@@ -262,6 +262,63 @@ describe("UploadCSVModal", () => {
             type: "test/csv"
         }); 
         await expect(uploadCSV(file)).rejects.toThrow("Line 4: Completed must be true or false.")
+    }); 
+    it("ignores empty lines", async () => {
+        const csvContent = 
+            `Instructions: Date format must be YYYY-MM-DD. Priority must be HIGH/MEDIUM/LOW. Completed must be true or false.
+
+            Title,Date,Priority,Completed
+            Testing Task, 2026-08-03, HIGH, false
+
+            Testing Task 2, 2026-08-04, MEDIUM, true
+
+
+            Testing Task 3, 2026-08-05, LOW, false`;  
+        const file = new File([csvContent], "testTasks.csv", {
+            type: "text/csv"
+        });
+        const tasks = await uploadCSV(file);
+        expect(tasks).toEqual([
+            {
+                id: expect.any(Number),
+                title: "Testing Task",
+                date: new Date("2026-08-03"),
+                priority: "HIGH",
+                completed: false
+            },
+            {
+                id: expect.any(Number),
+                title: "Testing Task 2",
+                date: new Date("2026-08-04"),
+                priority: "MEDIUM",
+                completed: true
+            },
+            {
+                id: expect.any(Number),
+                title: "Testing Task 3",
+                date: new Date("2026-08-05"),
+                priority: "LOW",
+                completed: false
+            }
+        ]);
     });
-    
+    it("returns an empty file if the CSV is completely empty (including instructions)", async () => {
+        const csvContent = ``; 
+        const file = new File([csvContent], "testTasks.csv", {
+            type: "test/csv"
+        });
+        const tasks = await uploadCSV(file);
+        expect(tasks).toEqual([]);
+    });
+    it("returns an error if there are too many columns", async () => {
+        const csvContent = 
+            `Instructions: Date format must be YYYY-MM-DD. Priority must be HIGH/MEDIUM/LOW. Completed must be true or false.
+
+            Title,Date,Priority,Completed
+            Testing Task, 2026-08-03, HIGH, false, extra added column, extra added column 2`;  
+        const file = new File([csvContent], "testTasks.csv", {
+            type: "test/csv"
+        });
+        await expect(uploadCSV(file)).rejects.toThrow("Line 4: Expected exactly four values.")
+    }); 
 });
