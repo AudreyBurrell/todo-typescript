@@ -188,6 +188,8 @@ body {
 
 /* Make first button stand out */
 
+/* Add task button */
+
 .taskAdditionArea button:first-child {
     background-color: #4f46e5;
     color: white;
@@ -197,15 +199,26 @@ body {
     background-color: #4338ca;
 }
 
+/* Upload CSV button */
 
-/* CSV button */
+.taskAdditionArea button:nth-child(2) {
+    background-color: #e8eaf0;
+    color: #1f2937;
+}
+
+.taskAdditionArea button:nth-child(2):hover {
+    background-color: #d9dce5;
+}
+
+/* Delete completed tasks button */
 
 .taskAdditionArea button:last-child {
-    background-color: #e8eaf0;
+    background-color: #dc2626;
+    color: white;
 }
 
 .taskAdditionArea button:last-child:hover {
-    background-color: #d9dce5;
+    background-color: #b91c1c;
 }
 
 

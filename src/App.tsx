@@ -159,6 +159,9 @@ function App() {
                     }}>
                         Upload CSV
                     </button>
+                    <button>
+                        Delete Completed Tasks
+                    </button>
                 </div>
             </div>
             <div className="rightSideBar">
