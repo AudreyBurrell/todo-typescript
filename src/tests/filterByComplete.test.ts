@@ -43,15 +43,7 @@ describe("filterByComplete", () => {
         ];
         const checked = true;
         const result = filterByComplete(tasks, checked);
-        expect(result).toEqual([
-            {
-                id: 2,
-                title: "Task two",
-                completed: false,
-                date: new Date(),
-                priority: "LOW",
-            }
-        ]);
+        expect(result).toEqual([tasks[1]]);
     });
     it("returns nothing if the tasks are all complete and it is checked", () => {
         const tasks: Task[] = [
