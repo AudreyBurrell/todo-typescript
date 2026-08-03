@@ -203,7 +203,7 @@ function App() {
                         <UploadCSVModal onClose={closeCSVModal} handleCSVUpload={handleCSVUpload} />
                     )}
                     {showDeleteComplete && ( 
-                        <DeleteCompletedTasks onClose={closeDeleteModal} tasks={tasks} deleteCompletedTasks={deleteCompletedTasks} />
+                        <DeleteCompletedTasks onClose={closeDeleteModal} tasks={tasks} deleteCompleteTasks={deleteCompletedTasks} />
                     )}
                 </div>
             </div>
