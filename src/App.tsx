@@ -4,6 +4,7 @@ import type { DueDate } from "./types/DueDate";
 import TaskItem from "./components/TaskItem";
 import AddTaskModal from "./components/AddTaskModal";
 import UploadCSVModal from "./components/UploadCSVModal";
+import DeleteCompletedTasks from "./components/DeleteCompleted";
 import { calculateProgress } from "./utils/calculateProgress";
 import { filterByPriority, filterByComplete, filterByDueDate, filterBySearch } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
@@ -16,6 +17,7 @@ function App() {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
     const [showModal, setShowModal] = useState(false);
     const [showCSVModal, setShowCSVModal] = useState(false);
+    const [showDeleteComplete, setShowDeleteComplete] = useState(false);
     const [selectedPriorities, setSelectedPriorities] = useState<Priority[]>([]);
     const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false);
     const [selectedDueDate, setSelectedDueDate] = useState<DueDate[]>([]);
@@ -55,6 +57,15 @@ function App() {
     const handleCSVUpload = async (file: File) => {
         const importedTasks = await uploadCSV(file);
         setTasks([...tasks, ...importedTasks]);
+    } 
+
+    function closeDeleteModal() {
+        setShowDeleteComplete(false);
+    } 
+
+    function deleteCompletedTasks() {
+        setTasks(tasks => tasks.filter(task => !task.completed));
+        setShowDeleteComplete(false);
     }
 
     function handlePriorities(priority: Priority) {
@@ -150,16 +161,22 @@ function App() {
                     <button onClick={() => {
                         setShowModal(true);
                         setShowCSVModal(false);
+                        setShowDeleteComplete(false);
                     }}>
                         + Task
                     </button>
                     <button onClick={() => {
                         setShowModal(false);
                         setShowCSVModal(true);
+                        setShowDeleteComplete(false);
                     }}>
                         Upload CSV
                     </button>
-                    <button>
+                    <button onClick={() => {
+                        setShowModal(false);
+                        setShowCSVModal(false);
+                        setShowDeleteComplete(true);
+                    }}>
                         Delete Completed Tasks
                     </button>
                 </div>
@@ -184,6 +201,9 @@ function App() {
                     )}
                     {showCSVModal && (
                         <UploadCSVModal onClose={closeCSVModal} handleCSVUpload={handleCSVUpload} />
+                    )}
+                    {showDeleteComplete && ( 
+                        <DeleteCompletedTasks onClose={closeDeleteModal} tasks={tasks} deleteCompletedTasks={deleteCompletedTasks} />
                     )}
                 </div>
             </div>
