@@ -7,6 +7,7 @@ import UploadCSVModal from "./components/UploadCSVModal";
 import { calculateProgress } from "./utils/calculateProgress";
 import { filterByPriority, filterByComplete, filterByDueDate, filterBySearch } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
+import { uploadCSV } from "./utils/parseCSV";
 import "./styles/App.css";
 
 import { useState } from "react";
@@ -49,6 +50,11 @@ function App() {
 
     function closeCSVModal() {
         setShowCSVModal(false);
+    } 
+
+    const handleCSVUpload = async (file: File) => {
+        const importedTasks = await uploadCSV(file);
+        setTasks([...tasks, ...importedTasks]);
     }
 
     function handlePriorities(priority: Priority) {
@@ -174,7 +180,7 @@ function App() {
                         <AddTaskModal onClose={closeAddTaskModal} onAddTask={addTask} /> 
                     )}
                     {showCSVModal && (
-                        <UploadCSVModal onClose={closeCSVModal} />
+                        <UploadCSVModal onClose={closeCSVModal} handleCSVUpload={handleCSVUpload} />
                     )}
                 </div>
             </div>

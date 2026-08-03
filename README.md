@@ -6,3 +6,4 @@ How I used AI:
 - Getting testing environment set up and writing the first test in calculateProgress.test.ts 
 - Brainstorming what tests I should make (but not making them for me)
 - Creating the first and second tests in TaskItem.test.tsx and walking me through it
+- Uploading CSV function in parseCSV.ts (but rather than also using AI to debug, I debugged it myself)
