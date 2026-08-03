@@ -78,5 +78,25 @@ describe("UploadCSVModal", () => {
             ? tasks
             : [...tasks, ...importedTasks];
         expect(newTasks).toEqual(tasks);
-    })
+    });
+    it("only returns the fourth line if there is information", async () => {
+        const csvContent = 
+            `Instructions: Date format must be YYYY-MM-DD. Priority must be HIGH/MEDIUM/LOW. Completed must be true or false.
+
+            Title,Date,Priority,Completed
+            Testing Task, 2026-08-03, HIGH, false`;  
+        const file = new File([csvContent], "testTasks.csv", {
+            type: "text/csv"
+        }); 
+        const tasks = await uploadCSV(file);
+        expect(tasks).toEqual([
+            {
+                id: expect.any(Number),
+                title: "Testing Task",
+                date: new Date("2026-08-03"),
+                priority: "HIGH",
+                completed: false
+            }, 
+        ]);
+    });
 });

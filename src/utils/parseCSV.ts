@@ -7,11 +7,10 @@ export function uploadCSV(file: File): Promise<Task[]> {
         reader.onload = () => {
             const csvText = reader.result as string;
 
-            const lines: string[] = csvText
-                .split("\n")
+            const dataLines: string[] = csvText
+                .split(/\r?\n/)
+                .slice(3)
                 .filter((line: string) => line.trim() !== "");
-
-            const dataLines: string[] = lines.slice(3);
 
             const tasks: Task[] = [];
 
