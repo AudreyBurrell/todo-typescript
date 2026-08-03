@@ -9,6 +9,7 @@ import { calculateProgress } from "./utils/calculateProgress";
 import { filterByPriority, filterByComplete, filterByDueDate, filterBySearch } from "./utils/taskUtils";
 import { initialTasks } from "./utils/initialTasks";
 import { uploadCSV } from "./utils/parseCSV";
+import { removeCompletedTasks } from "./utils/deleteCompleted";
 import "./styles/App.css";
 
 import { useState } from "react";
@@ -64,7 +65,7 @@ function App() {
     } 
 
     function deleteCompletedTasks() {
-        setTasks(tasks => tasks.filter(task => !task.completed));
+        setTasks(removeCompletedTasks(tasks));
         setShowDeleteComplete(false);
     }
 
